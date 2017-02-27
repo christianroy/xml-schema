@@ -1,6 +1,6 @@
 
 describe('Parsing', function() {
-    describe('Attrbiutes', function() {
+    describe('Attributes', function() {
         it('should correctly extract from root', function() {
             var xmlSchema = new XMLSchema({
                 tag: "basic",
@@ -53,6 +53,20 @@ describe('Parsing', function() {
 
             xmlSchema.parse('<?xml version="1.0" encoding="UTF-8" standalone="no"?><basic><key>test 1</key><key>test 2</key></basic>')
             .should.eql({ key: ["test 1", "test 2"] });
+        });
+
+        it('should correctly parse CDATA', function() {
+            var xmlSchema = new XMLSchema({
+                tag: "basic",
+                fields: {
+                    key: {
+                      cdata: true
+                    }
+                }
+            });
+
+            xmlSchema.parse('<?xml version="1.0" encoding="UTF-8" standalone="no"?><basic><key><![CDATA[test]]></key></basic>')
+            .should.eql({ key: "test" });
         });
     });
 
