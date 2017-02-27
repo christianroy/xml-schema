@@ -68,6 +68,22 @@ describe('Parsing', function() {
             xmlSchema.parse('<?xml version="1.0" encoding="UTF-8" standalone="no"?><basic><key><![CDATA[test]]></key></basic>')
             .should.eql({ key: "test" });
         });
+
+        it('should correctly parse CDATA without skipping sibblings', function() {
+            var xmlSchema = new XMLSchema({
+                tag: "basic",
+                fields: {
+                    key: {
+                      cdata: true
+                    },
+                    otherkey: {}
+                }
+            });
+
+            xmlSchema.parse('<?xml version="1.0" encoding="UTF-8" standalone="no"?><basic><key><![CDATA[test]]></key><otherkey>here!</otherkey></basic>')
+            .should.eql({ key: "test", otherkey: "here!" });
+        });
+
     });
 
 });

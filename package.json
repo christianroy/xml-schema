@@ -13,7 +13,7 @@
     "dependencies": {
         "lodash": "^3.9.3",
         "xmlbuilder": "2.4.5",
-        "xml-parser": "https://github.com/christianroy/xml-parser.git"
+        "xml-parser": "git://github.com/christianroy/xml-parser.git"
     },
     "devDependencies": {
         "mocha": "2.2.1",
